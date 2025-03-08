@@ -51,5 +51,27 @@ namespace DBSuper.Clases
 				return "Error: " + ex.Message;
 			}
 		}
+		public string ModificarActivo(int Codigo, bool Activo)
+		{
+			try
+			{
+				TIpoPRoducto tipoProd = Consultar(Codigo);
+				if (tipoProd == null)
+				{
+					return "El tipo de producto no se encuntra en la base de datos";
+				}
+				tipoProd.Activo = Activo;
+				dbSuper.SaveChanges();
+				if (Activo)
+				{
+					return "Se activó el tipo de producto";
+				}
+				return "Se inactivó el tipo de producto correctamente";
+			}
+			catch(Exception ex)
+			{
+				return "Error: " + ex.Message;
+			}
+		}
     }
 } 
